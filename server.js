@@ -7,8 +7,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 const OMDB_API_KEY = process.env.OMDB_API_KEY;
 
-// Middleware para servir arquivos estáticos (HTML, CSS, JS)
-app.use(express.static("public"));
+// Middleware para servir arquivos estáticos da pasta public
+app.use(express.static(path.join(__dirname, "public")));
 
 // Endpoint para buscar o filme via OMDB API
 app.get("/api/search", async (req, res) => {
