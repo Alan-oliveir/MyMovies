@@ -22,7 +22,12 @@ async function searchButtonClickHandler() {
     createModal(data);
     overlay.classList.add("open");
   } catch (error) {
-    notie.alert({ type: "error", text: error.message });
+    Swal.fire({
+      icon: "error",
+      title: "Erro!",
+      text: error.message,
+      confirmButtonText: "Ok",
+    });
   }
 }
 
@@ -40,12 +45,17 @@ function movieYearParameterGenerator() {
   if (movieYear.value.length !== 4 || Number.isNaN(Number(movieYear.value))) {
     throw new Error("Ano do filme inválido.");
   }
-  return movieYear.value; // Apenas retorna o valor
+  return movieYear.value;
 }
 
 function addToList(data) {
   if (isFilmAlreadOnList(data.imdbID)) {
-    notie.alert({ type: "error", text: "Filme já está na lista." });
+    Swal.fire({
+      icon: "warning",
+      title: "Aviso",
+      text: "Filme já está na lista.",
+      confirmButtonText: "Ok",
+    });
     return;
   }
   movieList.push(data);
@@ -74,15 +84,28 @@ function isFilmAlreadOnList(imdbID) {
 }
 
 function removeFilmFromList(imdbID) {
-  notie.confirm({
+  Swal.fire({
+    title: "Tem certeza?",
     text: "Tem certeza que deseja remover o filme da lista?",
-    submitText: "Sim",
-    cancelText: "Não",
-    submitCallback: function remove() {
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sim, remover!",
+    cancelButtonText: "Não",
+  }).then((result) => {
+    if (result.isConfirmed) {
       movieList = movieList.filter((movie) => movie.imdbID !== imdbID);
       document.getElementById(`movie-card-${imdbID}`).remove();
       updateLocalStorage();
-    },
+
+      Swal.fire({
+        icon: "success",
+        title: "Removido!",
+        text: "O filme foi removido da lista.",
+        confirmButtonText: "Ok",
+      });
+    }
   });
 }
 
