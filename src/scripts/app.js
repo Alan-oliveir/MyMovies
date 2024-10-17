@@ -8,7 +8,10 @@ let movieList = JSON.parse(localStorage.getItem("movieList")) ?? [];
 
 async function searchButtonClickHandler() {
   try {
-    let url = `/api/search?movieName=${movieNameParameterGenerator()}${movieYearParameterGenerator()}`;
+    let url = `/api/search?movieName=${movieNameParameterGenerator()}${
+      movieYear.value ? `&movieYear=${movieYearParameterGenerator()}` : ""
+    }`;
+
     const response = await fetch(url);
     const data = await response.json();
 
@@ -37,7 +40,7 @@ function movieYearParameterGenerator() {
   if (movieYear.value.length !== 4 || Number.isNaN(Number(movieYear.value))) {
     throw new Error("Ano do filme inválido.");
   }
-  return `&movieYear=${movieYear.value}`;
+  return movieYear.value; // Apenas retorna o valor
 }
 
 function addToList(data) {
