@@ -46,6 +46,11 @@ app.get("/api/search", async (req, res) => {
   }
 });
 
+// Rota padrão para a página inicial
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 // Roda o servidor
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
