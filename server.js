@@ -30,15 +30,18 @@ app.get("/api/search", async (req, res) => {
   }`;
 
   try {
+    console.log("Fetching movie data from:", url); // Log the URL
     const response = await fetch(url);
     const data = await response.json();
 
     if (data.Error) {
+      console.log("Movie not found:", data.Error); // Log error from API
       return res.status(404).json({ error: "Filme não encontrado." });
     }
 
     res.json(data);
   } catch (error) {
+    console.error("Error fetching movie data:", error); // Log general errors
     res.status(500).json({ error: "Erro ao buscar filme." });
   }
 });
