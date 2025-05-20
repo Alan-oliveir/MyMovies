@@ -78,9 +78,3 @@ Se você quiser contribuir com o projeto, sinta-se à vontade para enviar uma pu
 ## Licença
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)  
 Este projeto está licenciado sob a licença MIT. Consulte o arquivo [LICENSE.md](https://github.com/Alan-oliveir/MyMovies/blob/main/LICENSE.md) para mais detalhes.
-
-
-
-
-
-
